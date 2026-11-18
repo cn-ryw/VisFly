@@ -746,6 +746,7 @@ class SwarmStateTargetImageExtractor(StateTargetImageExtractor):
         )
         _swarm_features_dim = set_mlp_feature_extractor(self, "swarm", observation_space["swarm"], net_arch.get("state", {}), activation_fn) * \
                               observation_space["swarm"].shape[0]
+        self.swarm_extractor.add_module("flatten", SafeFlatten(start_dim=-2))
         self._features_dim = self._features_dim + _swarm_features_dim
 
 
