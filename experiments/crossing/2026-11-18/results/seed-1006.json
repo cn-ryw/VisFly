@@ -1,0 +1,185 @@
+{
+  "seed": 1006,
+  "drone": 2,
+  "thresholds": {
+    "budgets": [
+      500736,
+      1000704
+    ],
+    "common_steps": 44,
+    "first_roll_command_difference_over_0.01_input_frame": 0,
+    "first_y_difference_over_1cm_frame": 10,
+    "first_y_difference_over_10cm_frame": 29,
+    "first_depth_mean_abs_difference_over_10cm_frame": 4,
+    "first_any_action_difference_over_0.01_input_frame": 0
+  },
+  "checkpoints": {
+    "500736": {
+      "outcome": "collision",
+      "length": 44,
+      "first_contact_step": 44,
+      "first_contact_drones": [
+        2,
+        3
+      ],
+      "first_contact_objects": [
+        "wall_positive_y"
+      ],
+      "first_action": [
+        -1.0,
+        0.25039368867874146,
+        1.0,
+        -1.0
+      ],
+      "final_position": [
+        7.903704643249512,
+        1.4307574033737183,
+        1.282160758972168
+      ],
+      "approach": [
+        {
+          "x_m": 4.0,
+          "step": 33.336003053061596,
+          "lateral_m": 1.1726635694503784,
+          "forward_speed_mps": 11.014988899230957,
+          "lateral_velocity_mps": 0.7098415493965149
+        },
+        {
+          "x_m": 6.0,
+          "step": 38.96987440401538,
+          "lateral_m": 1.3143630027770996,
+          "forward_speed_mps": 12.423922538757324,
+          "lateral_velocity_mps": 0.8742675185203552
+        },
+        {
+          "x_m": 7.8,
+          "step": 43.730778495890824,
+          "lateral_m": 1.4261637926101685,
+          "forward_speed_mps": 12.975118637084961,
+          "lateral_velocity_mps": 0.3855589032173157
+        },
+        null
+      ],
+      "midplane_crossings": [
+        [],
+        [],
+        [
+          {
+            "fractional_step": 43.95606288944721,
+            "direction": "forward",
+            "y": 1.2772723270624478,
+            "z": 1.9034934326632869,
+            "in_aperture": false
+          }
+        ]
+      ],
+      "minimum_wall_distances": []
+    },
+    "1000704": {
+      "outcome": "success",
+      "length": 53,
+      "first_contact_step": null,
+      "first_contact_drones": [],
+      "first_contact_objects": [],
+      "first_action": [
+        0.3543305993080139,
+        1.0,
+        1.0,
+        -1.0
+      ],
+      "final_position": [
+        10.292935371398926,
+        -0.09285604953765869,
+        4.330273151397705
+      ],
+      "approach": [
+        {
+          "x_m": 4.0,
+          "step": 35.85972361545717,
+          "lateral_m": 0.6342824101448059,
+          "forward_speed_mps": 10.814809799194336,
+          "lateral_velocity_mps": -1.6238023042678833
+        },
+        {
+          "x_m": 6.0,
+          "step": 41.74107835765381,
+          "lateral_m": 0.3681715726852417,
+          "forward_speed_mps": 12.052295684814453,
+          "lateral_velocity_mps": -1.4249298572540283
+        },
+        {
+          "x_m": 7.8,
+          "step": 46.619337937365266,
+          "lateral_m": 0.15910355746746063,
+          "forward_speed_mps": 12.814359664916992,
+          "lateral_velocity_mps": -1.4159470796585083
+        },
+        {
+          "x_m": 8.0,
+          "step": 47.142782159992315,
+          "lateral_m": 0.13673491775989532,
+          "forward_speed_mps": 12.91757583618164,
+          "lateral_velocity_mps": -1.4009917974472046
+        }
+      ],
+      "midplane_crossings": [
+        [
+          {
+            "fractional_step": 47.28855354530818,
+            "direction": "forward",
+            "y": 0.143933767663246,
+            "z": 1.912196564309073,
+            "in_aperture": true
+          }
+        ],
+        [
+          {
+            "fractional_step": 47.142782159992315,
+            "direction": "forward",
+            "y": 0.13673492498073836,
+            "z": 3.6948414353530703,
+            "in_aperture": true
+          }
+        ],
+        [
+          {
+            "fractional_step": 42.842564417396254,
+            "direction": "forward",
+            "y": 0.2660511032549516,
+            "z": 2.4909718488109385,
+            "in_aperture": true
+          }
+        ]
+      ],
+      "minimum_wall_distances": [
+        {
+          "drone": 1,
+          "wall": "positive_y",
+          "center_to_solid_m": 0.4334763882014861,
+          "skin_clearance_m": 0.33347638820148606,
+          "fractional_step": 47.975739529591344
+        },
+        {
+          "drone": 2,
+          "wall": "positive_y",
+          "center_to_solid_m": 0.4392440158347455,
+          "skin_clearance_m": 0.3392440158347455,
+          "fractional_step": 46.48670671690872
+        },
+        {
+          "drone": 3,
+          "wall": "positive_y",
+          "center_to_solid_m": 0.2840021463230201,
+          "skin_clearance_m": 0.18400214632302012,
+          "fractional_step": 43.4387156571456
+        }
+      ]
+    }
+  },
+  "selection_rule": "lowest seed among the more frequent discordant direction (lowest seed on ties)",
+  "drone_order": [
+    "red",
+    "green",
+    "blue"
+  ]
+}

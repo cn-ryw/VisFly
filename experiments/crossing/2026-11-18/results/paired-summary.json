@@ -1,0 +1,209 @@
+{
+  "n_pairs": 100,
+  "matched_initial_pairs": 100,
+  "pair_counts": {
+    "both_success": 0,
+    "only_500736": 2,
+    "only_1000704": 4,
+    "both_fail": 94
+  },
+  "budgets": {
+    "500736": {
+      "episodes": 100,
+      "success": 2,
+      "collision": 98,
+      "timeout": 0,
+      "bypass": 0,
+      "simulator_counts": {
+        "collision": 98,
+        "success": 2
+      },
+      "mean_length": 43.37,
+      "first_contact_categories": {
+        "wall": 95,
+        "stage": 1,
+        "drone": 2
+      },
+      "first_contact_category_sets": {
+        "wall": 95,
+        "stage": 1,
+        "drone": 2
+      },
+      "first_contact_objects": {
+        "wall_positive_y": 66,
+        "stage_Plane": 1,
+        "wall_negative_y": 31,
+        "drone_1_2": 1,
+        "drone_1_3": 1
+      },
+      "initial_collision_episodes": 1,
+      "verified_pose_frames": 4437,
+      "maximum_endpoint_distance_error_m": 9.758096858880627e-07
+    },
+    "1000704": {
+      "episodes": 100,
+      "success": 4,
+      "collision": 96,
+      "timeout": 0,
+      "bypass": 0,
+      "simulator_counts": {
+        "collision": 96,
+        "success": 4
+      },
+      "mean_length": 42.77,
+      "first_contact_categories": {
+        "drone": 3,
+        "wall": 92,
+        "stage": 1
+      },
+      "first_contact_category_sets": {
+        "drone": 3,
+        "wall": 92,
+        "stage": 1
+      },
+      "first_contact_objects": {
+        "drone_2_3": 1,
+        "wall_negative_y": 76,
+        "wall_positive_y": 21,
+        "stage_Plane": 1,
+        "drone_1_3": 2
+      },
+      "initial_collision_episodes": 1,
+      "verified_pose_frames": 4377,
+      "maximum_endpoint_distance_error_m": 1.9830335280524025e-06
+    }
+  },
+  "exact_mcnemar": {
+    "method": "two-sided exact McNemar (conditional binomial on discordant pairs)",
+    "p_value": 0.6875,
+    "alpha": 0.05,
+    "discordant": 6,
+    "decision": "inconclusive"
+  },
+  "seeds": [
+    1000,
+    1099
+  ],
+  "aperture_x_ylo_yhi_zlo_zhi_m": [
+    8.0,
+    -0.6012076350737927,
+    0.6012076350737927,
+    -1.0,
+    7.0
+  ],
+  "drone_radius_m": 0.1,
+  "geometry": "independent GLB linear swept sphere vs wall solids, per-pose GLB triangle and neighbor-center endpoint distances; pairwise contact radius per original simulator",
+  "checkpoint_scope": "two checkpoints of one training run; development start seeds only",
+  "calibration": {
+    "passed": true,
+    "episodes": [
+      {
+        "agent_transitions": 500736,
+        "seed": 42,
+        "end": "success",
+        "episode_length": 51,
+        "final_collision_flags": [
+          false,
+          false,
+          false
+        ],
+        "exact_trace_fields": [
+          "action",
+          "action_delay_steps",
+          "collision_distance",
+          "collision_point",
+          "ctrl_dt",
+          "depth",
+          "done",
+          "endpoint_contact",
+          "is_collision",
+          "per_agent_past_goal",
+          "per_agent_success",
+          "reward",
+          "state",
+          "swept_wall_contact",
+          "target",
+          "time_limit"
+        ],
+        "exact_initial_hashes": [
+          "depth",
+          "state",
+          "swarm",
+          "target"
+        ]
+      },
+      {
+        "agent_transitions": 1000704,
+        "seed": 42,
+        "end": "collision",
+        "episode_length": 41,
+        "final_collision_flags": [
+          false,
+          false,
+          true
+        ],
+        "exact_trace_fields": [
+          "action",
+          "action_delay_steps",
+          "collision_distance",
+          "collision_point",
+          "ctrl_dt",
+          "depth",
+          "done",
+          "endpoint_contact",
+          "is_collision",
+          "per_agent_past_goal",
+          "per_agent_success",
+          "reward",
+          "state",
+          "swept_wall_contact",
+          "target",
+          "time_limit"
+        ],
+        "exact_initial_hashes": [
+          "depth",
+          "state",
+          "swarm",
+          "target"
+        ]
+      }
+    ]
+  },
+  "integrity": {
+    "verified_trajectory_hashes": 200,
+    "verified_checkpoint_hashes": 2,
+    "paired_starts": 100,
+    "four_matching_observation_branches": [
+      "depth",
+      "state",
+      "swarm",
+      "target"
+    ],
+    "rehash_stored_inputs": [
+      "depth",
+      "state",
+      "target"
+    ],
+    "team_control_steps": 8614,
+    "reset_contact_episodes": [
+      {
+        "budget": 500736,
+        "seed": 1072,
+        "flags": [
+          true,
+          false,
+          true
+        ]
+      },
+      {
+        "budget": 1000704,
+        "seed": 1072,
+        "flags": [
+          true,
+          false,
+          true
+        ]
+      }
+    ]
+  }
+}

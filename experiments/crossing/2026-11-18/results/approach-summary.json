@@ -1,0 +1,48 @@
+{
+  "center_band_m": 0.5012076350737927,
+  "section_x_m": 6.0,
+  "nominal_wall_front_x_m": 7.8,
+  "stats": [
+    {
+      "budget": 500736,
+      "group": "cleared_gap",
+      "drone_trajectories": 44,
+      "usable_x6": 44,
+      "outside_at_section": 9,
+      "would_be_outside_at_wall": 3,
+      "median_abs_lateral_m": 0.274408295750618
+    },
+    {
+      "budget": 500736,
+      "group": "wall",
+      "drone_trajectories": 106,
+      "usable_x6": 106,
+      "outside_at_section": 74,
+      "would_be_outside_at_wall": 102,
+      "median_abs_lateral_m": 0.6989305019378662
+    },
+    {
+      "budget": 1000704,
+      "group": "wall",
+      "drone_trajectories": 105,
+      "usable_x6": 105,
+      "outside_at_section": 83,
+      "would_be_outside_at_wall": 104,
+      "median_abs_lateral_m": 0.915887713432312
+    },
+    {
+      "budget": 1000704,
+      "group": "cleared_gap",
+      "drone_trajectories": 40,
+      "usable_x6": 40,
+      "outside_at_section": 9,
+      "would_be_outside_at_wall": 0,
+      "median_abs_lateral_m": 0.27891750633716583
+    }
+  ],
+  "definition": {
+    "wall": "A drone whose recorded segment touched a wall solid with the simulated body radius.",
+    "cleared_gap": "No recorded body collision; a forward crossing within the aperture, all recorded midplane crossings inside, and x reached 8.31 m. Other drones stopped early are excluded.",
+    "estimator": "y + (nominal_wall_front_x_m - section_x_m) * lateral_velocity_mps / forward_speed_mps"
+  }
+}

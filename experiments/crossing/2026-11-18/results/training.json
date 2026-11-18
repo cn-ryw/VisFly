@@ -1,0 +1,304 @@
+{
+  "training_seed": 42,
+  "torch_threads": 1,
+  "device": "cuda",
+  "targets": [
+    98304,
+    500736,
+    1000704
+  ],
+  "env": {
+    "num_agent_per_scene": 3,
+    "num_scene": 1,
+    "random_kwargs": {
+      "state_generator": {
+        "class": "Uniform",
+        "kwargs": [
+          {
+            "position": {
+              "mean": [
+                1.0,
+                0.0,
+                1.5
+              ],
+              "half": [
+                0.0,
+                2.0,
+                1.0
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "visual": true,
+    "max_episode_steps": 256,
+    "scene_kwargs": {
+      "path": "VisFly/datasets/visfly-beta/configs/scenes/garage_crossing"
+    },
+    "dynamics_kwargs": {
+      "dt": 0.03,
+      "ctrl_dt": 0.03,
+      "action_type": "bodyrate",
+      "ctrl_delay": true
+    },
+    "sensor_kwargs": [
+      {
+        "sensor_type": "DEPTH",
+        "uuid": "depth",
+        "resolution": [
+          64,
+          64
+        ]
+      }
+    ]
+  },
+  "algorithm": {
+    "policy": "MultiInputPolicy",
+    "policy_kwargs": {
+      "features_extractor_class": "SwarmStateTargetImageExtractor",
+      "features_extractor_kwargs": {
+        "net_arch": {
+          "depth": {
+            "layer": [
+              128
+            ]
+          },
+          "state": {
+            "layer": [
+              128,
+              64
+            ]
+          },
+          "target": {
+            "layer": [
+              128,
+              64
+            ]
+          },
+          "swarm": {
+            "layer": [
+              128,
+              64
+            ]
+          }
+        }
+      },
+      "net_arch": {
+        "pi": [
+          64,
+          64
+        ],
+        "vf": [
+          64,
+          64
+        ]
+      },
+      "activation_fn": "ReLU",
+      "optimizer_class": "Adam",
+      "optimizer_kwargs": {
+        "weight_decay": 1e-05
+      }
+    },
+    "verbose": 1,
+    "gamma": 0.99,
+    "n_steps": 256,
+    "ent_coef": 0.0,
+    "learning_rate": 0.0001,
+    "vf_coef": 0.5,
+    "max_grad_norm": 0.5,
+    "batch_size": 256,
+    "gae_lambda": 0.95,
+    "n_epochs": 5,
+    "clip_range": 0.2,
+    "device": "cuda"
+  },
+  "learn": {
+    "total_timesteps": 1000704
+  },
+  "repo_head": "6ff29bfcbc752da4f9474f6f0ece29d836111a22",
+  "yaml_sha256": {
+    "exps/examples/env_cfgs/crossing.yaml": "4391e7dd0aab473f90d244ad5c6ac25d3f2bead469aaecb16c08afb46ae0d3a4",
+    "exps/examples/alg_cfgs/crossing/PPO.yaml": "753c8b8b36645bd54e3cdd6a8b8cc9742c165c7546f8eaa66f93b4c7769bef47"
+  },
+  "initial_policy_sha256": "c951e3f16d934ee723f26866455f1bdb614ec0ed89e89b662b9ba02034b3829c",
+  "initial_policy_tensors_equal_to_historical_zero": 73,
+  "single_continuous_learn": true,
+  "development_seeds": [
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "historical_reward_replay": {
+    "archive_labels": 15,
+    "wall_rejections": 14,
+    "passage_control_training_step": 68040,
+    "agrees_with_independent_mesh_first_step_all_15": true
+  },
+  "checkpoints": [
+    {
+      "agent_transitions": 98304,
+      "team_control_steps": 32768,
+      "training_seconds": 446.781,
+      "weight_file": "ppo_98304.zip",
+      "sha256": "c50f9843c05b3ffb757ca5a0cdec8802b6c5146976038ae1c2f4915dc527f32a",
+      "training_outcomes": {
+        "agent_transitions": 98304,
+        "completed_training_episodes": 718,
+        "simulator_rewards": 3,
+        "geometric_team_passes": 3,
+        "wall_contact_episodes": 0,
+        "bypass_episodes": 0
+      },
+      "development_episodes": [
+        {
+          "seed": 42,
+          "end": "collision",
+          "length": 42,
+          "geometric_team_success": false
+        },
+        {
+          "seed": 43,
+          "end": "collision",
+          "length": 40,
+          "geometric_team_success": false
+        },
+        {
+          "seed": 44,
+          "end": "collision",
+          "length": 41,
+          "geometric_team_success": false
+        },
+        {
+          "seed": 45,
+          "end": "collision",
+          "length": 40,
+          "geometric_team_success": false
+        },
+        {
+          "seed": 46,
+          "end": "collision",
+          "length": 41,
+          "geometric_team_success": false
+        }
+      ],
+      "development_mean_length": 40.8,
+      "development_outcomes": {
+        "success": 0,
+        "collision": 5,
+        "timeout": 0
+      },
+      "development_verified_successes": 0
+    },
+    {
+      "agent_transitions": 500736,
+      "team_control_steps": 166912,
+      "training_seconds": 1483.115,
+      "weight_file": "ppo_500736.zip",
+      "sha256": "8dd0d217dad3ccf7a0cb2c0b2525b2c2b0e3890e3f3224d473dad770bc5681d3",
+      "training_outcomes": {
+        "agent_transitions": 500736,
+        "completed_training_episodes": 3832,
+        "simulator_rewards": 32,
+        "geometric_team_passes": 32,
+        "wall_contact_episodes": 0,
+        "bypass_episodes": 0
+      },
+      "development_episodes": [
+        {
+          "seed": 42,
+          "end": "success",
+          "length": 51,
+          "geometric_team_success": true
+        },
+        {
+          "seed": 43,
+          "end": "collision",
+          "length": 42,
+          "geometric_team_success": false
+        },
+        {
+          "seed": 44,
+          "end": "collision",
+          "length": 47,
+          "geometric_team_success": false
+        },
+        {
+          "seed": 45,
+          "end": "collision",
+          "length": 43,
+          "geometric_team_success": false
+        },
+        {
+          "seed": 46,
+          "end": "collision",
+          "length": 44,
+          "geometric_team_success": false
+        }
+      ],
+      "development_mean_length": 45.4,
+      "development_outcomes": {
+        "success": 1,
+        "collision": 4,
+        "timeout": 0
+      },
+      "development_verified_successes": 1
+    },
+    {
+      "agent_transitions": 1000704,
+      "team_control_steps": 333568,
+      "training_seconds": 2869.611,
+      "weight_file": "ppo_1000704.zip",
+      "sha256": "fd06ffd54282afbbf2b14fe1258fc166a04d8c017df780389bc86793b0b09b97",
+      "training_outcomes": {
+        "agent_transitions": 1000704,
+        "completed_training_episodes": 7605,
+        "simulator_rewards": 105,
+        "geometric_team_passes": 105,
+        "wall_contact_episodes": 0,
+        "bypass_episodes": 0
+      },
+      "development_episodes": [
+        {
+          "seed": 42,
+          "end": "collision",
+          "length": 41,
+          "geometric_team_success": false
+        },
+        {
+          "seed": 43,
+          "end": "collision",
+          "length": 31,
+          "geometric_team_success": false
+        },
+        {
+          "seed": 44,
+          "end": "collision",
+          "length": 42,
+          "geometric_team_success": false
+        },
+        {
+          "seed": 45,
+          "end": "collision",
+          "length": 45,
+          "geometric_team_success": false
+        },
+        {
+          "seed": 46,
+          "end": "collision",
+          "length": 43,
+          "geometric_team_success": false
+        }
+      ],
+      "development_mean_length": 40.4,
+      "development_outcomes": {
+        "success": 0,
+        "collision": 5,
+        "timeout": 0
+      },
+      "development_verified_successes": 0
+    }
+  ]
+}
