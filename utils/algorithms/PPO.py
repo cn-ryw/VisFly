@@ -398,14 +398,13 @@ class PPO(ori_PPO):
             self.logger.record("rollout/ep_rew_mean", safe_mean([ep_info["r"] for ep_info in self.ep_info_buffer]))
             self.logger.record("rollout/ep_len_mean", safe_mean([ep_info["l"] for ep_info in self.ep_info_buffer]))
 
-            if len(self.ep_info_buffer[0]["extra"]) >= 0:
-                for key in self.ep_info_buffer[0]["extra"].keys():
-                    self.logger.record(
-                        f"rollout/ep_{key}_mean",
-                        safe_mean(
-                            [ep_info["extra"][key] for ep_info in self.ep_info_buffer]
-                        ),
-                    )
+            for key in self.ep_info_buffer[0].get("extra", {}):
+                self.logger.record(
+                    f"rollout/ep_{key}_mean",
+                    safe_mean(
+                        [ep_info["extra"][key] for ep_info in self.ep_info_buffer]
+                    ),
+                )
         self.logger.record("time/fps", fps)
         self.logger.record("time/time_elapsed", int(time_elapsed), exclude="tensorboard")
         self.logger.record("time/total_timesteps", self.num_timesteps, exclude="tensorboard")
