@@ -164,7 +164,8 @@ class TestBase:
         """
         how to draw the figures
         """
-        for image, t, obs in zip(self.render_image_all, self.t, self.obs_all):
+        # Rendered frames start after the first step; observations include reset.
+        for image, t, obs in zip(self.render_image_all, self.t[1:], self.obs_all[1:]):
             image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
             cv2.imshow(winname=render_name, mat=image)
             if is_sub_video:
@@ -216,7 +217,7 @@ class TestBase:
                 video_obs.append(cv2.VideoWriter(path_obs[-1], cv2.VideoWriter_fourcc(*'avc1'), int(1/self.env.envs.dynamics.dt), (width, height)))
 
         # 将图片写入视频
-        for index, (image, t, obs) in enumerate(zip(self.render_image_all, self.t, self.obs_all)):
+        for index, (image, t, obs) in enumerate(zip(self.render_image_all, self.t[1:], self.obs_all[1:])):
             image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
             video.write(image)
             if is_sub_video:
