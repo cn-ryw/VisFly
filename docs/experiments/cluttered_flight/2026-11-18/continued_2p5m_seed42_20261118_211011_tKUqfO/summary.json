@@ -1,0 +1,279 @@
+{
+  "models": {
+    "32": {
+      "train": {
+        "outcomes": {
+          "collision": 13,
+          "out_of_bounds": 2
+        },
+        "success_median_time_s": null,
+        "success_median_min_clearance_m": null,
+        "success_min_clearance_m": null,
+        "median_final_goal_distance_m": 10.069,
+        "collision_approaches": {
+          "lateral": 1,
+          "above": 11,
+          "below": 1
+        },
+        "overhead_contacts_above_5m": 11
+      },
+      "heldout": {
+        "outcomes": {
+          "collision": 15
+        },
+        "success_median_time_s": null,
+        "success_median_min_clearance_m": null,
+        "success_min_clearance_m": null,
+        "median_final_goal_distance_m": 10.023,
+        "collision_approaches": {
+          "above": 14,
+          "lateral": 1
+        },
+        "overhead_contacts_above_5m": 14
+      }
+    },
+    "258048": {
+      "train": {
+        "outcomes": {
+          "collision": 15
+        },
+        "success_median_time_s": null,
+        "success_median_min_clearance_m": null,
+        "success_min_clearance_m": null,
+        "median_final_goal_distance_m": 7.034,
+        "collision_approaches": {
+          "below": 15
+        },
+        "overhead_contacts_above_5m": 0
+      },
+      "heldout": {
+        "outcomes": {
+          "collision": 15
+        },
+        "success_median_time_s": null,
+        "success_median_min_clearance_m": null,
+        "success_min_clearance_m": null,
+        "median_final_goal_distance_m": 6.905,
+        "collision_approaches": {
+          "below": 15
+        },
+        "overhead_contacts_above_5m": 0
+      }
+    },
+    "503808": {
+      "train": {
+        "outcomes": {
+          "collision": 14,
+          "success": 1
+        },
+        "success_median_time_s": 1.53,
+        "success_median_min_clearance_m": 0.39,
+        "success_min_clearance_m": 0.3895,
+        "median_final_goal_distance_m": 4.045,
+        "collision_approaches": {
+          "below": 9,
+          "lateral": 5
+        },
+        "overhead_contacts_above_5m": 0
+      },
+      "heldout": {
+        "outcomes": {
+          "collision": 15
+        },
+        "success_median_time_s": null,
+        "success_median_min_clearance_m": null,
+        "success_min_clearance_m": null,
+        "median_final_goal_distance_m": 3.588,
+        "collision_approaches": {
+          "below": 13,
+          "lateral": 2
+        },
+        "overhead_contacts_above_5m": 0
+      }
+    },
+    "761856": {
+      "train": {
+        "outcomes": {
+          "success": 5,
+          "collision": 10
+        },
+        "success_median_time_s": 1.56,
+        "success_median_min_clearance_m": 0.21,
+        "success_min_clearance_m": 0.12595,
+        "median_final_goal_distance_m": 1.998,
+        "collision_approaches": {
+          "lateral": 5,
+          "below": 5
+        },
+        "overhead_contacts_above_5m": 0
+      },
+      "heldout": {
+        "outcomes": {
+          "collision": 14,
+          "success": 1
+        },
+        "success_median_time_s": 1.53,
+        "success_median_min_clearance_m": 0.447,
+        "success_min_clearance_m": 0.44747,
+        "median_final_goal_distance_m": 2.273,
+        "collision_approaches": {
+          "below": 7,
+          "lateral": 6,
+          "above": 1
+        },
+        "overhead_contacts_above_5m": 0
+      }
+    },
+    "1007616": {
+      "train": {
+        "outcomes": {
+          "collision": 12,
+          "success": 3
+        },
+        "success_median_time_s": 1.65,
+        "success_median_min_clearance_m": 0.351,
+        "success_min_clearance_m": 0.27294,
+        "median_final_goal_distance_m": 3.024,
+        "collision_approaches": {
+          "lateral": 7,
+          "below": 4,
+          "above": 1
+        },
+        "overhead_contacts_above_5m": 0
+      },
+      "heldout": {
+        "outcomes": {
+          "collision": 14,
+          "success": 1
+        },
+        "success_median_time_s": 1.47,
+        "success_median_min_clearance_m": 0.296,
+        "success_min_clearance_m": 0.29577,
+        "median_final_goal_distance_m": 6.128,
+        "collision_approaches": {
+          "lateral": 10,
+          "below": 4
+        },
+        "overhead_contacts_above_5m": 0
+      }
+    },
+    "1511424": {
+      "train": {
+        "outcomes": {
+          "collision": 5,
+          "success": 10
+        },
+        "success_median_time_s": 1.605,
+        "success_median_min_clearance_m": 0.284,
+        "success_min_clearance_m": 0.11035,
+        "median_final_goal_distance_m": 0.432,
+        "collision_approaches": {
+          "below": 2,
+          "lateral": 3
+        },
+        "overhead_contacts_above_5m": 0
+      },
+      "heldout": {
+        "outcomes": {
+          "success": 4,
+          "collision": 11
+        },
+        "success_median_time_s": 1.695,
+        "success_median_min_clearance_m": 0.41,
+        "success_min_clearance_m": 0.24963,
+        "median_final_goal_distance_m": 2.024,
+        "collision_approaches": {
+          "lateral": 6,
+          "below": 5
+        },
+        "overhead_contacts_above_5m": 0
+      }
+    },
+    "2002944": {
+      "train": {
+        "outcomes": {
+          "success": 12,
+          "collision": 3
+        },
+        "success_median_time_s": 1.635,
+        "success_median_min_clearance_m": 0.351,
+        "success_min_clearance_m": 0.13728,
+        "median_final_goal_distance_m": 0.329,
+        "collision_approaches": {
+          "lateral": 3
+        },
+        "overhead_contacts_above_5m": 0
+      },
+      "heldout": {
+        "outcomes": {
+          "collision": 12,
+          "success": 3
+        },
+        "success_median_time_s": 1.74,
+        "success_median_min_clearance_m": 0.626,
+        "success_min_clearance_m": 0.45963,
+        "median_final_goal_distance_m": 1.691,
+        "collision_approaches": {
+          "below": 7,
+          "lateral": 5
+        },
+        "overhead_contacts_above_5m": 0
+      }
+    },
+    "2506752": {
+      "train": {
+        "outcomes": {
+          "collision": 3,
+          "success": 12
+        },
+        "success_median_time_s": 1.605,
+        "success_median_min_clearance_m": 0.315,
+        "success_min_clearance_m": 0.16219,
+        "median_final_goal_distance_m": 0.428,
+        "collision_approaches": {
+          "below": 2,
+          "lateral": 1
+        },
+        "overhead_contacts_above_5m": 0
+      },
+      "heldout": {
+        "outcomes": {
+          "collision": 7,
+          "success": 8
+        },
+        "success_median_time_s": 1.77,
+        "success_median_min_clearance_m": 0.517,
+        "success_min_clearance_m": 0.30311,
+        "median_final_goal_distance_m": 0.496,
+        "collision_approaches": {
+          "below": 4,
+          "lateral": 3
+        },
+        "overhead_contacts_above_5m": 0
+      }
+    }
+  },
+  "showcase": {
+    "checkpoint_steps": 2506752,
+    "layout": "train",
+    "scene": "garage_simple_l_medium_0.scene_instance.json",
+    "case_id": "train-02",
+    "start_x_m": 1.0,
+    "start_y_m": -1.8,
+    "start_z_m": 1.5,
+    "outcome": "success",
+    "episode_steps": 52,
+    "sim_seconds": 1.56,
+    "min_clearance_m": 0.31893,
+    "final_goal_distance_m": 0.3448,
+    "terminal_x_m": 8.82971,
+    "terminal_y_m": 0.10093,
+    "terminal_z_m": 1.28232,
+    "preterminal_obstacle_dx_m": 0.12547,
+    "preterminal_obstacle_dy_m": -0.05974,
+    "preterminal_obstacle_dz_m": 1.07413,
+    "collision_approach": "",
+    "reward": 6.2043
+  },
+  "new_episodes": 90
+}

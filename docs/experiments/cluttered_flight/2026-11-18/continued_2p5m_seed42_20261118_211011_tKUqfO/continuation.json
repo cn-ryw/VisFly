@@ -1,0 +1,144 @@
+{
+  "source_checkpoint": "exps/examples/saved/cluttered_flight/baseline_1m_seed42_20261118_203054_vHNu2a/PPO_1007616.zip",
+  "source_steps": 1007616,
+  "seed": 42,
+  "repo_revision": "6ff29bfcbc752da4f9474f6f0ece29d836111a22",
+  "environment": {
+    "num_agent_per_scene": 48,
+    "random_kwargs": {
+      "state_generator": {
+        "class": "Uniform",
+        "kwargs": [
+          {
+            "position": {
+              "mean": [
+                1.0,
+                0.0,
+                1.5
+              ],
+              "half": [
+                0.0,
+                2.0,
+                1.0
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "visual": true,
+    "max_episode_steps": 256,
+    "scene_kwargs": {
+      "path": "VisFly/datasets/visfly-beta/configs/scenes/garage_simple_l_medium"
+    },
+    "dynamics_kwargs": {
+      "dt": 0.03,
+      "ctrl_dt": 0.03,
+      "action_type": "bodyrate",
+      "ctrl_delay": true
+    },
+    "sensor_kwargs": [
+      {
+        "sensor_type": "DEPTH",
+        "uuid": "depth",
+        "resolution": [
+          64,
+          64
+        ]
+      }
+    ],
+    "num_scene": 1,
+    "seed": 42
+  },
+  "ppo": {
+    "policy": "CustomMultiInputPolicy",
+    "policy_kwargs": {
+      "ortho_init": false,
+      "features_extractor_class": "StateTargetImageExtractor",
+      "features_extractor_kwargs": {
+        "net_arch": {
+          "depth": {
+            "layer": [
+              128
+            ]
+          },
+          "state": {
+            "layer": [
+              128,
+              64
+            ]
+          },
+          "target": {
+            "layer": [
+              128,
+              64
+            ]
+          }
+        }
+      },
+      "net_arch": {
+        "pi": [
+          64,
+          64
+        ],
+        "vf": [
+          64,
+          64
+        ]
+      },
+      "activation_fn": "ReLU",
+      "optimizer_kwargs": {
+        "weight_decay": 1e-05
+      }
+    },
+    "verbose": 1,
+    "gamma": 0.99,
+    "n_steps": 256,
+    "ent_coef": 0.0,
+    "learning_rate": 5e-05,
+    "vf_coef": 0.5,
+    "max_grad_norm": 0.5,
+    "batch_size": 512,
+    "gae_lambda": 0.95,
+    "n_epochs": 10,
+    "clip_range": 0.2,
+    "device": "cuda"
+  },
+  "train_scene": "datasets/visfly-beta/configs/scenes/garage_simple_l_medium/garage_simple_l_medium_0.scene_instance.json",
+  "heldout_scene": "datasets/visfly-beta/configs/scenes/garage_simple_l_medium/garage_simple_low_m_0.scene_instance.json",
+  "milestones": [
+    1511424,
+    2002944,
+    2506752
+  ],
+  "additional_training_steps": 1499136,
+  "completed_checkpoints": [
+    {
+      "steps": 1511424,
+      "path": "PPO_1511424.zip",
+      "elapsed_seconds": 717.26,
+      "torch_peak_reserved_mib": 1118.0
+    },
+    {
+      "steps": 2002944,
+      "path": "PPO_2002944.zip",
+      "elapsed_seconds": 1322.87,
+      "torch_peak_reserved_mib": 1120.0
+    },
+    {
+      "steps": 2506752,
+      "path": "PPO_2506752.zip",
+      "elapsed_seconds": 1944.72,
+      "torch_peak_reserved_mib": 1118.0
+    }
+  ],
+  "numerical_recovery": {
+    "resume_steps": 2002944,
+    "first_invalid_update_steps": 2015232,
+    "diagnostic_update_steps": 2113536,
+    "diagnostic_max_log_ratio": 468.8873596191406,
+    "implementation": "log-space PPO surrogate and mathematically equivalent scaled gradient clipping",
+    "second_overflow_steps": 2211840,
+    "second_overflow_max_log_ratio": 51.67120361328125
+  }
+}

@@ -161,6 +161,8 @@ VisFly/exps/examples/saved/cluttered_flight/
 
 训练日志可用 TensorBoard 查看，和模型文件一起保存在 `exps/examples/saved/<任务名>/`。
 
+可以查看 32 步验证、正式 PPO 训练和固定起点评估的结果。[cluttered_flight 实验记录](docs/experiments/cluttered_flight/2026-11-18/README.md)
+
 ## 进阶用法
 
 需要改任务行为或网络结构时，再从相应的示例入手。VisFly 提供 Gym 风格的接口，环境负责给出观测、推进仿真和计算奖励，训练代码负责更新策略。可微动力学也可用于基于梯度的策略优化和规划。
