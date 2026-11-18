@@ -36,7 +36,7 @@ class MultiNavigationEnv(MultiDroneGymEnvBase):
             requires_grad=requires_grad,
             random_kwargs=random_kwargs,
             dynamics_kwargs=dynamics_kwargs,
-            scene_kwargs=scene_kwargs,
+            scene_kwargs={**scene_kwargs, "check_crossing_walls": True},
             sensor_kwargs=sensor_kwargs,
             device=device,
             max_episode_steps=max_episode_steps,
@@ -58,14 +58,14 @@ class MultiNavigationEnv(MultiDroneGymEnvBase):
             self._paths = [None for _ in range(self.num_envs)]
 
     def reset_by_id(self, indices):
-        obs = super().reset_agent_by_id(indices)
+        obs = super().reset_by_id(indices)
         if self.is_find_path:
             for indice in indices:
                 self._paths[indice] = self.envs.find_path(self.target[indice])
         return obs
 
-    def reset(self):
-        obs = super().reset()
+    def reset(self, is_test=False):
+        obs = super().reset(is_test=is_test)
         if self.is_find_path:
             self._paths = self.envs._find_paths(target=self.target)
         return obs
@@ -109,7 +109,7 @@ class MultiNavigationEnv(MultiDroneGymEnvBase):
         return done
 
     def get_success(self) -> th.Tensor:
-        success = self.position[:,0] > 10
+        success = (self.position[:,0] > 10) & ~self.is_collision
         return success
         # return (self.position - self.target).norm(dim=1) <= self.success_radius)
 

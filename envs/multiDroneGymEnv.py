@@ -4,6 +4,7 @@ from typing import Union, Tuple, List, Dict, Optional
 from gymnasium import spaces
 import numpy as np
 from abc import ABC, abstractmethod
+from copy import deepcopy
 import torch as th
 from ..utils.type import Uniform
 from ..utils.randomization import UniformStateRandomizer
@@ -35,7 +36,6 @@ class MultiDroneGymEnvBase(VecEnv):
             seed=seed,
             visual=visual,
             multi_drone=True,
-            requires_grad=requires_grad,
             # device=device,  # because at least under 1e3 (common useful range) envs, cpu is faster than gpu
             dynamics_kwargs=dynamics_kwargs,
             random_kwargs=random_kwargs,
@@ -120,9 +120,13 @@ class MultiDroneGymEnvBase(VecEnv):
         self._rewards += self._reward
 
         # update collision, timeout _done
-        self._done = self._success | self.is_collision | (self._step_count >= self.max_episode_steps) | self.get_done()
+        terminated = self._success | self.is_collision | self.get_done()
+        truncated = self._step_count >= self.max_episode_steps
+        self._done = terminated | truncated
         for i in range(self.num_scene):
-            self._done[i * self.num_agent_per_scene:(i + 1) * self.num_agent_per_scene] = self._done[i * self.num_agent_per_scene:(i + 1) * self.num_agent_per_scene].any()
+            group = slice(i * self.num_agent_per_scene, (i + 1) * self.num_agent_per_scene)
+            self._done[group] = self._done[group].any()
+            truncated[group] = truncated[group].any() & ~terminated[group].any()
 
         # update and record _info: eposide, timeout
         for indice in range(self.num_agent):
@@ -142,14 +146,14 @@ class MultiDroneGymEnvBase(VecEnv):
                     key: observations[key][indice] for key in observations.keys()
                 }
 
-                if self._step_count[indice] >= self.max_episode_steps:
-                    self._info[indice]["TimeLimit.truncated"] = True
+                self._info[indice]["TimeLimit.truncated"] = bool(truncated[indice])
 
         if not self.requires_grad:
-            _done, _reward, _info = self._done.cpu().clone().numpy(), self._reward.cpu().clone().numpy(), self._info.copy()
+            _done, _reward, _info = self._done.cpu().clone().numpy(), self._reward.cpu().clone().numpy(), deepcopy(self._info)
             # reset all the dead agents
-            if not is_test:
+            if not is_test and self._done.any():
                 self.check_done()
+                observations = self.get_observation()
             return observations, _reward, _done, _info
 
     def check_done(self):
@@ -164,11 +168,12 @@ class MultiDroneGymEnvBase(VecEnv):
         # self._step_count = self._step_count.clone().detach()
         # self._done = self._done.clone().detach()
 
-    def reset(self):
+    def reset(self, is_test=False):
         self._step_count = th.zeros((self.num_agent,), dtype=th.int32)
         self._reward = th.zeros((self.num_agent,))
         self._rewards = th.zeros((self.num_agent,))
         self._done = th.zeros(self.num_agent, dtype=bool)
+        self._success = th.zeros(self.num_agent, dtype=bool)
         self._info = [{"TimeLimit.truncated": False} for _ in range(self.num_agent)]
         self.envs.reset()
         return self.get_observation()
@@ -177,6 +182,7 @@ class MultiDroneGymEnvBase(VecEnv):
         self._reward[indices] = 0
         self._rewards[indices] = 0
         self._done[indices] = False
+        self._success[indices] = False
         self._step_count[indices] = 0
         self.envs.reset_agents(indices)
         for indice in indices:
@@ -184,8 +190,8 @@ class MultiDroneGymEnvBase(VecEnv):
                 "TimeLimit.truncated": False,
             }
 
-    def render(self, render_kwargs={}):
-        obs = self.envs.render(render_kwargs)
+    def render(self, **kwargs):
+        obs = self.envs.render(**kwargs)
         return obs
 
     def get_done(self):
@@ -234,6 +240,10 @@ class MultiDroneGymEnvBase(VecEnv):
         return self.envs.state
 
     @property
+    def extend_state(self):
+        return self.envs.extend_state
+
+    @property
     def info(self):
         return self._info
 
@@ -255,7 +265,7 @@ class MultiDroneGymEnvBase(VecEnv):
 
     @property
     def velocity(self):
-        return self.envs.const_velocity
+        return self.envs.velocity
 
     @property
     def angular_velocity(self):

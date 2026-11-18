@@ -4,6 +4,7 @@ import sys
 from habitat_sim import SensorType
 
 from .ObjectManger import ObjectManager
+from .crossing_walls import load_crossing_walls, swept_wall_hits
 
 sys.path.append(os.getcwd())
 
@@ -130,6 +131,7 @@ class SceneManager(ABC):
             is_object_collidable=False,
             col_refine_steps=0,
             dt=0.03,
+            check_crossing_walls=False,
     ):
 
         if reset_settings is None:
@@ -183,6 +185,9 @@ class SceneManager(ABC):
         self.agents: List[List[habitat_sim.agent]] = [[] for _ in range(num_scene)]
 
         self._scene_bounds = [None for _ in range(num_scene)]
+        self._check_crossing_walls = check_crossing_walls
+        self._crossing_walls = [[] for _ in range(num_scene)]
+        self.swept_wall_collision = np.zeros(self.num_agent, dtype=bool)
 
         # self.is_find_path = is_find_path
         # if is_find_path:
@@ -348,6 +353,12 @@ class SceneManager(ABC):
         hab_vel, _ = std_to_habitat(velocity, None) if velocity is not None else (None, None)
         drone_id = 0
         for scene_id in range(self.num_scene):
+            if self._crossing_walls[scene_id]:
+                group = slice(drone_id, drone_id + self.num_agent_per_scene)
+                starts = np.array([agent.scene_node.translation for agent in self.agents[scene_id]])
+                self.swept_wall_collision[group] = swept_wall_hits(
+                    self._crossing_walls[scene_id], starts, hab_pos[group], self.drone_radius
+                )
             for agent_id in range(self.num_agent_per_scene):
                 self.agents[scene_id][agent_id].scene_node.translation = hab_pos[drone_id]
                 self.agents[scene_id][agent_id].scene_node.rotation = mn.Quaternion(mn.Vector3(hab_ori[drone_id][1:]), hab_ori[drone_id][0])
@@ -453,7 +464,7 @@ class SceneManager(ABC):
                 rela_dis = np.diag(np.full(self.num_agent_per_scene, np.inf, dtype=np.float32))
                 for i in range(self.num_agent_per_scene):
                     j = i + 1
-                    rela_dis[i, j:] = np.linalg.norm(positions[j:] - positions[i])
+                    rela_dis[i, j:] = np.linalg.norm(positions[j:] - positions[i], axis=1)
                 rela_dis += rela_dis.T
                 min_rela_dis, min_indices = np.min(rela_dis, axis=1), np.argmin(rela_dis, axis=1)
                 is_rela_dis_less = min_rela_dis < cur_dis
@@ -837,6 +848,10 @@ class SceneManager(ABC):
             if self.scenes[scene_id] is not None:
                 self.scenes[scene_id].close()
             self.scenes[scene_id] = self._load_scene(scene_path)
+            if self._check_crossing_walls:
+                self._crossing_walls[scene_id] = load_crossing_walls(scene_path, self.scenes[scene_id])
+                start = scene_id * self.num_agent_per_scene
+                self.swept_wall_collision[start:start + self.num_agent_per_scene] = False
             self._scene_bounds[scene_id] = self.scenes[scene_id].get_active_scene_graph().get_root_node().cumulative_bb
             # if self.is_find_path:
             #     self.path_finders[scene_id].bounds = self._scene_bounds[scene_id]
@@ -852,11 +867,13 @@ class SceneManager(ABC):
             # get render agent handles in each scene
             self._obj_mgrs[scene_id] = self.scenes[scene_id].get_rigid_object_manager()
 
-            if self.render_settings is not None or self.is_multi_drone:
+            if self.render_settings is not None:
                 self._render_camera[scene_id] = self.scenes[scene_id].get_agent(self.num_agent_per_scene)
                 # create line renders and object managers
                 self._line_mgrs[scene_id] = self.scenes[scene_id].get_debug_line_render()
                 self._line_mgrs[scene_id].set_line_width(self.render_settings["line_width"])
+
+            if self.render_settings is not None or self.is_multi_drone:
                 # create objects in each scene
                 for agent_id in range(self.num_agent_per_scene):
                     self._drones[scene_id][agent_id] = self._obj_mgrs[scene_id].add_object_by_template_handle(
@@ -950,6 +967,11 @@ class SceneManager(ABC):
             scene_id = indice // self.num_agent_per_scene
             agent_id = indice % self.num_agent_per_scene
             self._reset_agent(scene_id, agent_id, hab_position, hab_orientation)
+            if self._crossing_walls[scene_id]:
+                point = np.asarray(hab_position).reshape(1, 3)
+                self.swept_wall_collision[indice] = swept_wall_hits(
+                    self._crossing_walls[scene_id], point, point, self.drone_radius
+                )[0]
         self._update_collision_infos(indices=indices,velocities=hab_velocities)
 
     def _reset_agent(self, scene_id: int, agent_id: int, position: np.ndarray, orientation: np.ndarray):
@@ -967,6 +989,9 @@ class SceneManager(ABC):
                 rotation=quaternion.from_float_array(orientation),
             )
         )
+        if self.is_multi_drone or self.render_settings is not None:
+            self._drones[scene_id][agent_id].root_scene_node.transformation = \
+                self.agents[scene_id][agent_id].scene_node.transformation
 
     def reset_scenes(self, indices):
         """
@@ -1035,7 +1060,8 @@ class SceneManager(ABC):
         return sensor_cfgs_list
 
     def close(self):
-        for scene_id in range(self.num_scene):
+        # Later simulators share the first simulator's OpenGL context.
+        for scene_id in reversed(range(self.num_scene)):
             self.scenes[scene_id].close()
             # self.scenes[scene_id] = None
 

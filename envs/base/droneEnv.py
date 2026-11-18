@@ -366,6 +366,8 @@ class DroneEnvsBase:
         self._collision_dis = (self._collision_vector - 0).norm(dim=1)
         self._is_collision = (self._collision_dis < self.uav_radius) # | self._is_out_bounds
 
+        if self.visual and self.sceneManager.swept_wall_collision.any():
+            self._is_collision |= th.as_tensor(self.sceneManager.swept_wall_collision, device=self.device)
         self._once_collided = self._once_collided | self._is_collision
         if self._is_update_approaching_info:
             self.sceneManager.update_approaching_info(self.velocity)
