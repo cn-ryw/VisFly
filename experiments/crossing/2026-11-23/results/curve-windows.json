@@ -1,0 +1,26 @@
+{
+  "agent_steps": 10008576,
+  "rows": 543,
+  "tensorboard_rows_verified": 543,
+  "final_sample_rate": 0.94,
+  "windows": [
+    {
+      "low": 900000,
+      "high": 1100000,
+      "paper": 0.7924030541422082,
+      "required": 0.6924030541422083,
+      "actual": 0.8938744375,
+      "difference_points": 10.147138335779172,
+      "meets_threshold": true
+    },
+    {
+      "low": 9000000,
+      "high": 10000000,
+      "paper": 0.8987929328844444,
+      "required": 0.7987929328844444,
+      "actual": 0.9761279733333335,
+      "difference_points": 7.733504044888906,
+      "meets_threshold": true
+    }
+  ]
+}

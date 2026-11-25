@@ -1,0 +1,164 @@
+{
+  "training": {
+    "agent_steps": 10008576,
+    "gradient_epochs": 5430,
+    "rollouts": 543,
+    "finished_teams": 59740,
+    "successful_teams": 53909,
+    "elapsed_s": 6699.198448380001
+  },
+  "windows": [
+    {
+      "low": 900000,
+      "high": 1100000,
+      "paper": 0.7924030541422082,
+      "required": 0.6924030541422083,
+      "actual": 0.8938744375,
+      "difference_points": 10.147138335779172,
+      "meets_threshold": true
+    },
+    {
+      "low": 9000000,
+      "high": 10000000,
+      "paper": 0.8987929328844444,
+      "required": 0.7987929328844444,
+      "actual": 0.9761279733333335,
+      "difference_points": 7.733504044888906,
+      "meets_threshold": true
+    }
+  ],
+  "cohorts": [
+    {
+      "split": "development",
+      "steps": 0,
+      "counts": {
+        "native": {
+          "collision": 100
+        },
+        "legacy": {
+          "incomplete": 98,
+          "collision": 2
+        },
+        "strict": {
+          "incomplete": 95,
+          "collision": 5
+        }
+      },
+      "episodes": 100,
+      "mean_controls": 83.69,
+      "training_seconds": 0.116,
+      "sha256": "2b5cadfff71d6efa4573c1af47e0d45df470c5d35b80332866818d65c43f09b9",
+      "strict_wilson95": [
+        0.0,
+        0.03699349820698568
+      ]
+    },
+    {
+      "split": "development",
+      "steps": 1013760,
+      "counts": {
+        "native": {
+          "success": 92,
+          "collision": 8
+        },
+        "legacy": {
+          "success": 90,
+          "collision": 10
+        },
+        "strict": {
+          "success": 75,
+          "collision": 25
+        }
+      },
+      "episodes": 100,
+      "mean_controls": 59.36,
+      "training_seconds": 695.567,
+      "sha256": "532cf7eecc2e16c240c8bc5d5e3ca3eb874956f17861b4ace9d705ae8f62321b",
+      "strict_wilson95": [
+        0.656955364519384,
+        0.8245478863771232
+      ]
+    },
+    {
+      "split": "development",
+      "steps": 5013504,
+      "counts": {
+        "native": {
+          "success": 95,
+          "collision": 5
+        },
+        "legacy": {
+          "success": 90,
+          "collision": 10
+        },
+        "strict": {
+          "success": 75,
+          "collision": 25
+        }
+      },
+      "episodes": 100,
+      "mean_controls": 60.49,
+      "training_seconds": 3530.401,
+      "sha256": "e75641a07e68b87a61ada8c3e398b32265dd5097917705f3a01dab7601e044c0",
+      "strict_wilson95": [
+        0.656955364519384,
+        0.8245478863771232
+      ]
+    },
+    {
+      "split": "development",
+      "steps": 10008576,
+      "counts": {
+        "native": {
+          "success": 99,
+          "collision": 1
+        },
+        "legacy": {
+          "success": 99,
+          "collision": 1
+        },
+        "strict": {
+          "success": 91,
+          "collision": 9
+        }
+      },
+      "episodes": 100,
+      "mean_controls": 56.49,
+      "training_seconds": 6699.196,
+      "sha256": "de70686061a7dab39c830a8b72dbf6bf1355eca57c8e2b60006abf35090aa303",
+      "strict_wilson95": [
+        0.8377378714728368,
+        0.9519274599974349
+      ]
+    },
+    {
+      "split": "held-out",
+      "steps": 10008576,
+      "counts": {
+        "native": {
+          "success": 99,
+          "collision": 1
+        },
+        "legacy": {
+          "success": 98,
+          "collision": 2
+        },
+        "strict": {
+          "success": 87,
+          "collision": 13
+        }
+      },
+      "episodes": 100,
+      "mean_controls": 57.38,
+      "training_seconds": 6699.196,
+      "sha256": "de70686061a7dab39c830a8b72dbf6bf1355eca57c8e2b60006abf35090aa303",
+      "strict_wilson95": [
+        0.7901964855992357,
+        0.9224283257275948
+      ]
+    }
+  ],
+  "paper_curve_threshold_met": true,
+  "independent_strict_threshold_met": true,
+  "archive": "/home/ruan/research/VisFly-local-setup-20261113/paper-crossing-20261123"
+}

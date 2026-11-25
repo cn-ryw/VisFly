@@ -1,0 +1,103 @@
+{
+  "archived_weights": [
+    {
+      "agent_steps": 0,
+      "sha256": "2b5cadfff71d6efa4573c1af47e0d45df470c5d35b80332866818d65c43f09b9",
+      "gradient_epochs": 0,
+      "adam_updates_per_parameter": 0,
+      "optimizer_parameter_groups_with_state": 0,
+      "elapsed_seconds": 0.116
+    },
+    {
+      "agent_steps": 1013760,
+      "sha256": "532cf7eecc2e16c240c8bc5d5e3ca3eb874956f17861b4ace9d705ae8f62321b",
+      "gradient_epochs": 550,
+      "adam_updates_per_parameter": 13200,
+      "optimizer_parameter_groups_with_state": 33,
+      "elapsed_seconds": 695.567
+    },
+    {
+      "agent_steps": 5013504,
+      "sha256": "e75641a07e68b87a61ada8c3e398b32265dd5097917705f3a01dab7601e044c0",
+      "gradient_epochs": 2720,
+      "adam_updates_per_parameter": 65280,
+      "optimizer_parameter_groups_with_state": 33,
+      "elapsed_seconds": 3530.401
+    },
+    {
+      "agent_steps": 10008576,
+      "sha256": "de70686061a7dab39c830a8b72dbf6bf1355eca57c8e2b60006abf35090aa303",
+      "gradient_epochs": 5430,
+      "adam_updates_per_parameter": 130320,
+      "optimizer_parameter_groups_with_state": 33,
+      "elapsed_seconds": 6699.196
+    }
+  ],
+  "training": {
+    "native_success_samples": 543,
+    "raw_reward_samples": 543,
+    "team_events": 59740,
+    "successful_teams": 53909
+  },
+  "cohorts": [
+    {
+      "split": "development",
+      "steps": 0,
+      "episodes": 100,
+      "strict": {
+        "incomplete": 95,
+        "collision": 5
+      },
+      "weight_sha256": "2b5cadfff71d6efa4573c1af47e0d45df470c5d35b80332866818d65c43f09b9",
+      "unique_starts": 100
+    },
+    {
+      "split": "development",
+      "steps": 1013760,
+      "episodes": 100,
+      "strict": {
+        "success": 75,
+        "collision": 25
+      },
+      "weight_sha256": "532cf7eecc2e16c240c8bc5d5e3ca3eb874956f17861b4ace9d705ae8f62321b",
+      "unique_starts": 100
+    },
+    {
+      "split": "development",
+      "steps": 5013504,
+      "episodes": 100,
+      "strict": {
+        "success": 75,
+        "collision": 25
+      },
+      "weight_sha256": "e75641a07e68b87a61ada8c3e398b32265dd5097917705f3a01dab7601e044c0",
+      "unique_starts": 100
+    },
+    {
+      "split": "development",
+      "steps": 10008576,
+      "episodes": 100,
+      "strict": {
+        "success": 91,
+        "collision": 9
+      },
+      "weight_sha256": "de70686061a7dab39c830a8b72dbf6bf1355eca57c8e2b60006abf35090aa303",
+      "unique_starts": 100
+    },
+    {
+      "split": "held-out",
+      "steps": 10008576,
+      "episodes": 100,
+      "strict": {
+        "success": 87,
+        "collision": 13
+      },
+      "weight_sha256": "de70686061a7dab39c830a8b72dbf6bf1355eca57c8e2b60006abf35090aa303",
+      "unique_starts": 100
+    }
+  ],
+  "total_evaluated_teams": 500,
+  "dev_paired_seeds": 100,
+  "held_out_distinct_initial_states": 100,
+  "data_integrity": "All NPZ bytes, actions, depths, substeps, frame endpoints and four initial observations matched their records."
+}

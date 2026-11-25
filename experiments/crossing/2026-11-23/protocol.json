@@ -1,0 +1,64 @@
+{
+  "baseline": "VisFly 2024 swarm-crossing, historical official examples/crossing/rl.py without task or algorithm changes",
+  "training_seed": 42,
+  "n_scenes": 24,
+  "n_agents_per_scene": 3,
+  "nominal_agent_interactions": 10000000,
+  "rollout_agent_interactions": 18432,
+  "post_update_checkpoints": [
+    0,
+    1013760,
+    5013504,
+    10008576
+  ],
+  "development": {
+    "seeds_inclusive": [
+      1000,
+      1099
+    ],
+    "episodes_per_seed": 1,
+    "deterministic": true,
+    "policy_device": "cpu"
+  },
+  "held_out": {
+    "seeds_inclusive": [
+      20000,
+      20099
+    ],
+    "episodes_per_seed": 1,
+    "only_checkpoint": 10008576,
+    "frozen_before_first_use": true,
+    "required_strict_successes_of_100": 80
+  },
+  "native": "Original environment is_success for all three at the same step, x > 10. Original success takes priority on coincident terminal flags; raw flags are retained.",
+  "legacy": "Historical control-frame garage audit with 0.10 m threshold for peer centers",
+  "strict": "Three 0.10 m spheres, measured 8 x 2.5 ms integration steps per 20 ms control step; sweep consecutive positions against walls/stage and relative peer trajectories (centers >=0.20 m), cross real aperture and all x > 10 at termination",
+  "figure_comparison": {
+    "figure": "arXiv:2407.14783v4 Figure 7 right, Swarm Crossing",
+    "windows_agent_steps": [
+      [
+        900000,
+        1100000
+      ],
+      [
+        9000000,
+        10000000
+      ]
+    ],
+    "window_mean": "trapezoidal area / window width after linear interpolation",
+    "permitted_shortfall_absolute": 0.1,
+    "paper_windows": [
+      0.7924030541422082,
+      0.8987929328844444
+    ],
+    "required_minimum": [
+      0.6924030541422082,
+      0.7987929328844444
+    ],
+    "measure": "original training rollout/success_rate, stored at each rollout without extra smoothing"
+  },
+  "history": "4/100 prior audit, development cohort; historical corrected environment, control sampling and different configuration; do not pool",
+  "recording_selection": "First strict success and failure by ascending seed in the final development set, if present. Use fixed alternative cases with explicit provenance only for absent categories. Preserve all seeds.",
+  "inference": "One training seed, within-garage development and independent seed holdout only.",
+  "evaluation_initialization": "Create a fresh single-scene official environment for every evaluation seed, after loading the frozen policy reseed and reset. All four initial observation arrays must match across development checkpoints. Specified before any held-out run after detecting stale rendered rigid objects on scene reuse."
+}
