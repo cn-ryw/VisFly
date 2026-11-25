@@ -34,3 +34,14 @@ export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 两组均用种子 42 从零训练。每轮采样 24 个场景 × 3 架飞机 × 256 个控制步，每组完成 543 轮。原版冻结权重、对照权重、机间终止权重均在相同的合法起点和机间终止环境中评估。每种子计一个团队回合，采用确定性动作；逐子步独立核对机间距离、墙体、机库和真实开口。只有三机全部安全穿过开口并越过终点才算成功。
 
 开发集为 1000–1099。先用开发集严格通过数挑选两组各自表现最好的非零检查点，同分时取首碰为机间接触较少者，再同分取较晚者。把入选权重的 SHA-256 写入 `selection.json` 后，才评估 30000–30099 的新留出集。每个训练末权重均接受留出评估。每项测量的 `episodes.csv` 可按种子对应到首碰子步、轨迹、动作、三路真实深度和模型路径。
+
+## 核验与回看
+
+```bash
+"$visfly_python" "$scripts/verify_training.py" "$run"
+/usr/bin/python3 "$scripts/summarize_pairs.py" "$run"
+/usr/bin/python3 "$scripts/present_results.py" "$run"
+/usr/bin/python3 "$scripts/archive_results.py" "$run" "$run/results"
+```
+
+`training-verification.json` 逐轮核对原始团队事件、TensorBoard、合法复位、优化器更新及终末权重。`paired/paired-metrics.csv` 列出同种子的成功与机间碰撞变化。`figures/paired-case.png` 对齐同一起点下的两组轨迹，并画出实际机间中心距。工作簿导出脚本用带 openpyxl 和 lxml 的 Python 运行，参数为运行目录、原工作簿和新副本路径。
