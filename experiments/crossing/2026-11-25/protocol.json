@@ -1,0 +1,20 @@
+{
+  "start_date": "2026-11-25",
+  "scope": "Three-drone crossing in one garage, training 24 parallel copies. Only team start clearance and peer-contact termination are in scope.",
+  "train_seed": 42,
+  "nominal_agent_interactions_per_arm": 10000000,
+  "actual_agent_interactions_per_arm": 10008576,
+  "checkpoints": [0, 1013760, 5013504, 10008576],
+  "training_arms": {
+    "control": "Original PPO and termination, original joint start distribution conditioned on every pair center distance >= 0.20 m.",
+    "peer": "Identical to control, with additional team termination when any pair center distance falls below 0.20 m anywhere on the measured physics substep chords. Peer collision takes priority over same-step success/time limit."
+  },
+  "evaluation": {
+    "common_environment": "Corrected starts and strict peer termination for every frozen policy including historical baseline. Same garage, new instance per seed, deterministic CPU inference after reseeding. Keep 0.10 m body radius; independently audit swept bodies vs both walls, stage, other agents, and true aperture; all three final x > 10 m.",
+    "development": [1000, 1099],
+    "holdout": [30000, 30099],
+    "policy_selection": "Primary comparison: both 10,008,576-step weights and the historical final weight. Also select the best nonzero checkpoint of each trained arm on development only by strict successes, then fewer first peer collisions, then later checkpoint. Freeze model SHA256 before using holdout. Evaluate unique selected/final weights once per holdout seed. Never tune on holdout.",
+    "metrics": ["strict team success", "first contact objects and step", "in-flight peer collision teams", "minimum inter-drone center distance", "all initial distances", "mean episode length", "paired changes across arms", "Wilson 95% intervals"],
+    "reference": {"weight":"PPO_10008576.zip","sha256":"de70686061a7dab39c830a8b72dbf6bf1355eca57c8e2b60006abf35090aa303","old_heldout_seeds":[20000,20099],"old_heldout_strict":87,"comparison":"Historical 87/100 used different starts and seeds. Reevaluate the same frozen weight on the new common cohort."}
+  }
+}
