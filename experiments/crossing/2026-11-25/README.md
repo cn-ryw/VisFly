@@ -45,3 +45,9 @@ export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 ```
 
 `training-verification.json` 逐轮核对原始团队事件、TensorBoard、合法复位、优化器更新及终末权重。`paired/paired-metrics.csv` 列出同种子的成功与机间碰撞变化。`figures/paired-case.png` 对齐同一起点下的两组轨迹，并画出实际机间中心距。工作簿导出脚本用带 openpyxl 和 lxml 的 Python 运行，参数为运行目录、原工作簿和新副本路径。
+
+## 11 月 25 日关机恢复
+
+22:47 关机切换系统前，已冻结全部训练和评估。磁盘恢复点为对照组 2,764,800、机间终止组 2,304,000 条交互。两份策略与 Adam 已用作者 PPO 在 CPU 上重新加载并逐项核实。[检查点与开发集实测](results/shutdown-20261125.json) · [开发种子 1000 的地面首碰](results/early-ground-case.json)
+
+返回 Ubuntu 后可用 `bash "$scripts/resume_ubuntu.sh" "$run" --check` 核验，再用 `--start` 启动两组续训和后续评估。此处 `run` 指原实验归档。每组重建 24 个合法车库开局，保留权重、Adam 和累计步数。对照组从第 150 轮重开，机间终止组从第 125 轮重开。新段写到 `train/<组别>/segments/after_<恢复步数>/`；核算训练曲线时取旧段截至恢复点的有效前缀，加上新段。前文连续训练的逐轮验收需按此次中断边界核对团队复位与 TensorBoard。GPU 续训首轮待用户恢复后执行。

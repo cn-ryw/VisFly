@@ -1,0 +1,171 @@
+{
+  "paused_at_local": "2026-11-25T22:47:00+08:00",
+  "protocol_sha256": "f692b4190ea49aa4f681af9e709ac4a4359c500b6ca07fc1cbb54ef15468f150",
+  "arms": {
+    "control": {
+      "frozen_collected": 2967552,
+      "frozen_rollouts": 161,
+      "last_disk_steps": 2764800,
+      "disk_rollouts": 150,
+      "elapsed_s": 2546.63,
+      "sha256": "32e4fced98b19b13334c46e4226df794b8c201c38061c4457887520194026899",
+      "members_sha256": {
+        "policy.pth": "1640bbe892cab867b8e5f5eedf35401cde2638234254e289ca184d2703b6a8ac",
+        "policy.optimizer.pth": "de208aea24f8d2616a4f8a3b3e73fa8465911a29699391f9a23f854cb1f2ca80"
+      },
+      "frozen_after_disk_interactions": 202752,
+      "timing_trial": {
+        "before_interactions_per_second": 1126.462928947574,
+        "measured_rollouts": 4,
+        "after_interactions_per_second": 1129.3771636898352
+      }
+    },
+    "peer": {
+      "frozen_collected": 2746368,
+      "frozen_rollouts": 149,
+      "last_disk_steps": 2304000,
+      "disk_rollouts": 125,
+      "elapsed_s": 2154.254,
+      "sha256": "a7f578acd07b77c77827a32b1d89ad2540149010855597f2fbb405393103c200",
+      "members_sha256": {
+        "policy.pth": "e059a1700933c8b26deeda966d42c898c95ba171cccfd91034abe3b1b04f957d",
+        "policy.optimizer.pth": "bca3f82debe4e3c5109e18feead3fcbaac7ddbb03b3c6084bc7cbe0cdda072e0"
+      },
+      "frozen_after_disk_interactions": 442368,
+      "timing_trial": {
+        "before_interactions_per_second": 1124.733034558041,
+        "measured_rollouts": 3,
+        "after_interactions_per_second": 1105.2347544522408
+      }
+    }
+  },
+  "development": [
+    {
+      "arm": "baseline",
+      "agent_steps": 10008576,
+      "episodes": 100,
+      "checkpoint_sha256": "de70686061a7dab39c830a8b72dbf6bf1355eca57c8e2b60006abf35090aa303",
+      "strict_successes": 94,
+      "counts": {
+        "success": 94,
+        "collision": 6
+      },
+      "first_contact_groups": {
+        "drone": 6
+      },
+      "minimum_start_m": 0.21504224331758548,
+      "mean_control_steps": 55.75
+    },
+    {
+      "arm": "control",
+      "agent_steps": 0,
+      "episodes": 100,
+      "checkpoint_sha256": "9479bf10912374accbadd53a04e408b08be48fd35813ed52e29c5d9c6eee07ec",
+      "strict_successes": 0,
+      "counts": {
+        "incomplete": 98,
+        "collision": 2
+      },
+      "first_contact_groups": {
+        "drone": 2
+      },
+      "minimum_start_m": 0.21504224331758548,
+      "mean_control_steps": 84.5
+    },
+    {
+      "arm": "control",
+      "agent_steps": 1013760,
+      "episodes": 100,
+      "checkpoint_sha256": "e2a138c22850a70d3d5e795892e1717a2247cd0960eacf7a84530ddb4049bae2",
+      "strict_successes": 65,
+      "counts": {
+        "success": 65,
+        "collision": 35
+      },
+      "first_contact_groups": {
+        "drone": 13,
+        "stage": 22
+      },
+      "minimum_start_m": 0.21504224331758548,
+      "mean_control_steps": 58.23
+    },
+    {
+      "arm": "peer",
+      "agent_steps": 1013760,
+      "episodes": 100,
+      "checkpoint_sha256": "80b0ab0375f03543f8668ef4de444e3be9d223c6cde87310660b18b2ce6f3967",
+      "strict_successes": 34,
+      "counts": {
+        "collision": 66,
+        "success": 34
+      },
+      "first_contact_groups": {
+        "stage": 60,
+        "drone": 6
+      },
+      "minimum_start_m": 0.21504224331758548,
+      "mean_control_steps": 48.45
+    }
+  ],
+  "holdout_episodes": 0,
+  "weight_reload": {
+    "checked_at": "2026-11-25T22:51:34+08:00",
+    "method": "Historical utils.algorithms.ppo.ppo.load with env=None and device=cpu, followed by equality checks against both serialized PyTorch members.",
+    "torch_version": "2.2.1",
+    "arms": {
+      "control": {
+        "checkpoint": "/home/ruan/research/VisFly-local-setup-20261113/peer-clearance-20261125/pause-20261125-2247/control/rolling.zip",
+        "archive_sha256": "32e4fced98b19b13334c46e4226df794b8c201c38061c4457887520194026899",
+        "members_sha256": {
+          "policy.pth": "1640bbe892cab867b8e5f5eedf35401cde2638234254e289ca184d2703b6a8ac",
+          "policy.optimizer.pth": "de208aea24f8d2616a4f8a3b3e73fa8465911a29699391f9a23f854cb1f2ca80"
+        },
+        "loaded_via": "utils.algorithms.ppo.ppo.load",
+        "device": "cpu",
+        "env_is_none": true,
+        "agent_steps": 2764800,
+        "completed_rollouts": 150,
+        "ppo_gradient_epochs": 1500,
+        "n_steps": 256,
+        "n_envs": 72,
+        "n_epochs": 10,
+        "batch_size": 768,
+        "seed": 42,
+        "policy_tensors_checked": 73,
+        "policy_tensors_finite_and_equal": true,
+        "adam_parameter_count": 33,
+        "adam_state_tensors_checked": 99,
+        "adam_tensors_finite_and_equal": true,
+        "adam_updates_per_parameter": 36000
+      },
+      "peer": {
+        "checkpoint": "/home/ruan/research/VisFly-local-setup-20261113/peer-clearance-20261125/pause-20261125-2247/peer/rolling.zip",
+        "archive_sha256": "a7f578acd07b77c77827a32b1d89ad2540149010855597f2fbb405393103c200",
+        "members_sha256": {
+          "policy.pth": "e059a1700933c8b26deeda966d42c898c95ba171cccfd91034abe3b1b04f957d",
+          "policy.optimizer.pth": "bca3f82debe4e3c5109e18feead3fcbaac7ddbb03b3c6084bc7cbe0cdda072e0"
+        },
+        "loaded_via": "utils.algorithms.ppo.ppo.load",
+        "device": "cpu",
+        "env_is_none": true,
+        "agent_steps": 2304000,
+        "completed_rollouts": 125,
+        "ppo_gradient_epochs": 1250,
+        "n_steps": 256,
+        "n_envs": 72,
+        "n_epochs": 10,
+        "batch_size": 768,
+        "seed": 42,
+        "policy_tensors_checked": 73,
+        "policy_tensors_finite_and_equal": true,
+        "adam_parameter_count": 33,
+        "adam_state_tensors_checked": 99,
+        "adam_tensors_finite_and_equal": true,
+        "adam_updates_per_parameter": 30000
+      }
+    },
+    "verified": true
+  },
+  "source_date": "2026-11-25",
+  "status": "paused_for_shutdown"
+}
